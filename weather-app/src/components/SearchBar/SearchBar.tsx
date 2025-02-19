@@ -13,6 +13,7 @@ import {
   UnitLabel,
   Button,
   ResponsiveContainer,
+  InlineContainer, // Add this import
 } from "./SearchBar.styles"; // Import styles
 
 interface SearchBarProps {
@@ -43,42 +44,45 @@ const SearchBar = ({ onSubmit, onUnitChange, unit }: SearchBarProps) => {
   return (
     <ResponsiveContainer>
       <Form onSubmit={formik.handleSubmit}>
-        {/* INPUT AND BUTTON CONTAINER */}
-        <InputContainer>
-          <Input
-            type="text"
-            name="city"
-            placeholder="Enter city name"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.city}
-          />
-          <Button type="submit" aria-label="Search">
-            <FaSearch /> {/* Search icon */}
-          </Button>
-        </InputContainer>
+        {/* INPUT, BUTTON, AND UNIT CONTAINER */}
+        <InlineContainer>
+          {/* INPUT AND BUTTON CONTAINER */}
+          <InputContainer>
+            <Input
+              type="text"
+              name="city"
+              placeholder="Enter city name"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.city}
+            />
+            <Button type="submit" aria-label="Search">
+              <FaSearch /> {/* Search icon */}
+            </Button>
+          </InputContainer>
+
+          {/* UNIT SELECTION WITH TOGGLE SWITCH */}
+          <UnitContainer>
+            <UnitLabel>Metric: °C</UnitLabel>
+            <Switch
+              onChange={handleUnitToggle}
+              checked={unit === "imperial"}
+              checkedIcon={false}
+              uncheckedIcon={false}
+              height={20}
+              width={48}
+              handleDiameter={18}
+              offColor="#ccc"
+              onColor="#007BFF"
+            />
+            <UnitLabel>Imperial: °F</UnitLabel>
+          </UnitContainer>
+        </InlineContainer>
 
         {/* VALIDATION ERROR */}
         {formik.touched.city && formik.errors.city ? (
           <ErrorMessage>{formik.errors.city}</ErrorMessage>
         ) : null}
-
-        {/* UNIT SELECTION WITH TOGGLE SWITCH */}
-        <UnitContainer>
-          <UnitLabel>Metric: °C</UnitLabel>
-          <Switch
-            onChange={handleUnitToggle}
-            checked={unit === "imperial"}
-            checkedIcon={false}
-            uncheckedIcon={false}
-            height={20}
-            width={48}
-            handleDiameter={18}
-            offColor="#ccc"
-            onColor="#007BFF"
-          />
-          <UnitLabel>Imperial: °F</UnitLabel>
-        </UnitContainer>
       </Form>
     </ResponsiveContainer>
   );

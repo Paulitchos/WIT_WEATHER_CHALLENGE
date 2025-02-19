@@ -13,21 +13,29 @@ const theme = {
 // FORM CONTAINER
 export const Form = styled.form`
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: flex-start;
   gap: 1rem;
   padding: 1.5rem;
   background-color: ${theme.background};
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
+  max-width: auto;
   margin: 0 auto;
+`;
+
+// INPUT, BUTTON, AND UNIT CONTAINER
+export const InlineContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
 `;
 
 // INPUT AND BUTTON CONTAINER
 export const InputContainer = styled.div`
   display: flex;
-  width: 100%;
+  width: 100%; /* Adjust width as needed */
   gap: 0.5rem;
 `;
 
@@ -50,8 +58,15 @@ export const Input = styled.input`
 // ERROR MESSAGE
 export const ErrorMessage = styled.div`
   color: ${theme.error};
+  background-color: rgba(255, 0, 0, 0.1); /* Light red background */
+  padding: 0.5rem;
   font-size: 0.875rem;
   margin-top: 0.25rem;
+  border-left: 4px solid ${theme.error}; /* Adds a left border for emphasis */
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(255, 0, 0, 0.1);
+  width: 88%; /* Span full width */
+  text-align: left;
 `;
 
 // UNIT SELECTION CONTAINER
@@ -59,7 +74,6 @@ export const UnitContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin: 0.5rem 0;
 `;
 
 // UNIT LABEL
@@ -110,12 +124,25 @@ export const ResponsiveContainer = styled.div`
 
   @media (max-width: 480px) {
     ${Form} {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem;
+      background-color: ${theme.background};
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
       gap: 0.75rem;
+      margin: 0.5rem 0.5rem;
     }
 
-    ${UnitContainer} {
-      flex-direction: column;
+    ${InlineContainer} {
+      flex-direction: column; /* Stack input + button and unit controller vertically on mobile */
       gap: 0.5rem;
+    }
+
+    ${InputContainer} {
+      width: 100%; /* Full width on mobile */
     }
 
     ${Button} {

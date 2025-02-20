@@ -82,6 +82,17 @@ export const UnitLabel = styled.span`
   color: ${theme.text};
 `;
 
+export const StyledSwitch = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+  left: -0.5rem; /* Move switch slightly to the left */
+
+  @media (max-width: 480px) {
+    left: 0rem;
+  }
+`;
+
 // SUBMIT BUTTON
 export const Button = styled.button`
   padding: 0.75rem 1rem;
@@ -107,6 +118,7 @@ export const Button = styled.button`
 
 // RESPONSIVE CONTAINER
 export const ResponsiveContainer = styled.div`
+  padding: 0.5rem 0.75rem;
   @media (max-width: 768px) {
     ${Form} {
       padding: 1rem;
@@ -117,7 +129,6 @@ export const ResponsiveContainer = styled.div`
     }
 
     ${Button} {
-      padding: 0.5rem 0.75rem;
       font-size: 0.875rem;
     }
   }

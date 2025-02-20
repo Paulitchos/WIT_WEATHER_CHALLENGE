@@ -13,7 +13,8 @@ import {
   UnitLabel,
   Button,
   ResponsiveContainer,
-  InlineContainer, // Add this import
+  InlineContainer,
+  StyledSwitch,
 } from "./SearchBar.styles"; // Import styles
 
 interface SearchBarProps {
@@ -29,10 +30,14 @@ const SearchBar = ({ onSubmit, onUnitChange, unit }: SearchBarProps) => {
       city: "", // Initial value for the city input
     },
     validationSchema: Yup.object({
-      city: Yup.string().required("City is required"),
-    }), // Yup validation schema
+      city: Yup.string()
+        .required("City is required")
+        .trim() // Trim the input value before validation
+        .min(1, "City cannot be empty"), // Ensure the trimmed value is not empty
+    }),
     onSubmit: (values) => {
-      onSubmit(values.city); // Call the parent onSubmit with the city value
+      const trimmedCity = values.city.trim(); // Trim the city input before submitting
+      onSubmit(trimmedCity); // Call the parent onSubmit with the trimmed city value
     },
   });
 
@@ -64,6 +69,7 @@ const SearchBar = ({ onSubmit, onUnitChange, unit }: SearchBarProps) => {
           {/* UNIT SELECTION WITH TOGGLE SWITCH */}
           <UnitContainer>
             <UnitLabel>Metric: °C</UnitLabel>
+            <StyledSwitch>
             <Switch
               onChange={handleUnitToggle}
               checked={unit === "imperial"}
@@ -74,7 +80,9 @@ const SearchBar = ({ onSubmit, onUnitChange, unit }: SearchBarProps) => {
               handleDiameter={18}
               offColor="#ccc"
               onColor="#007BFF"
+              className="Switch"
             />
+            </StyledSwitch>
             <UnitLabel>Imperial: °F</UnitLabel>
           </UnitContainer>
         </InlineContainer>

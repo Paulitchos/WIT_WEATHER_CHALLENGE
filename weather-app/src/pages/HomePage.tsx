@@ -6,7 +6,7 @@ import { fetchWeatherData } from "../service/weatherService";
 
 //COMPONENTS
 import SearchBar from "../components/SearchBar/SearchBar";
-import WeatherDisplay from "../components/WeatherDisplay";
+import WeatherDisplay from "../components/WeatherDisplay/WeatherDisplay";
 import ErrorDisplay from "../components/ErrorDisplay";
 
 //STYLE

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 
 //SERVICE
 import { fetchWeatherData } from "../service/weatherService";
+import { fetchCoordinates } from "../service/coordsService";
 
 //COMPONENTS
 import SearchBar from "../components/SearchBar/SearchBar";
@@ -16,7 +17,10 @@ const HomePage = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState<string | null>(null);
   const [unit, setUnit] = useState<"metric" | "imperial">("metric");
-  const [city, setCity] = useState(""); // Store the city name separately
+  const [city, setCity] = useState("");
+  const [lat, setLat] = useState<number | null>(null);
+  const [lon, setLon] = useState<number | null>(null);
+
 
   // Fetch weather data when the city or unit changes
   useEffect(() => {
@@ -29,6 +33,9 @@ const HomePage = () => {
     setCity(city); // Save the city name
     try {
       const data = await fetchWeatherData(city, unit);
+      const { lat, lon } = await fetchCoordinates(city);
+      setLat(lat);
+      setLon(lon);
       setWeatherData(data);
       setError(null);
     } catch (err) {
@@ -36,6 +43,8 @@ const HomePage = () => {
         "Failed to fetch weather data. Please check the city name and try again."
       );
       setWeatherData(null);
+      setLat(null);
+      setLon(null);
     }
   };
 
@@ -51,7 +60,7 @@ const HomePage = () => {
         unit={unit}
       />
       {error && <ErrorDisplay message={error} />}
-      {weatherData && <WeatherDisplay data={weatherData} unit={unit} />}
+      {weatherData && <WeatherDisplay data={weatherData} unit={unit} lat={lat ?? 0} lon={lon ?? 0}/>}
     </div>
   );
 };

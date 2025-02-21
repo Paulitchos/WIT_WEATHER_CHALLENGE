@@ -14,7 +14,9 @@ export const WeatherContainer = styled.div`
     grid-template-columns: 1fr 1fr; /* Two columns for weather & map */
     grid-template-rows: auto auto; /* Weather & Map in first row, Graph in second */
     align-items: center;
-    max-width: 50%;
+    padding: 1.5rem;
+    max-width: 45%;
+    margin: auto;
   }
 `;
 

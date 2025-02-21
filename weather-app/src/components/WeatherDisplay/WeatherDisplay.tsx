@@ -6,9 +6,11 @@ import {
   CurrentWeatherTemp,
   WeatherIcon,
   WeatherMapContainer,
-  WeatherGraphContainer, // New container for the graph
+  WeatherGraphContainer,
+  WeatherForecastContainer
 } from "./WeatherDisplay.styles";
 import TemperatureGraph from "../TemperatureGraph";
+import Forecast from "../FiveDayForecast/FiveDayForecast";
 
 interface WeatherDisplayProps {
   data: any;
@@ -59,6 +61,10 @@ const WeatherDisplay = ({ data, unit, lat, lon }: WeatherDisplayProps) => {
       <WeatherGraphContainer>
         <TemperatureGraph forecast={data.list} unit={unit} />
       </WeatherGraphContainer>
+      
+      <WeatherForecastContainer>
+        <Forecast forecast={data.list} unit={unit} />
+      </WeatherForecastContainer>
     </WeatherContainer>
   );
 };

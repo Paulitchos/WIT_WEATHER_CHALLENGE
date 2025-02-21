@@ -68,3 +68,16 @@ export const WeatherGraphContainer = styled.div`
     width: 100%; /* Full width on mobile */
   }
 `;
+
+export const WeatherForecastContainer = styled.div`
+  grid-column: span 2; /* Makes it take full grid width on larger screens */
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 0;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    grid-column: span 1; /* Single column for smaller screens */
+    width: 100%; /* Full width on mobile */
+  }
+`;

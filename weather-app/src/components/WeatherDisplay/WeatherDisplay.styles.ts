@@ -7,13 +7,14 @@ export const WeatherContainer = styled.div`
   grid-template-rows: auto auto;
   gap: 1.5rem;
   padding: 1.5rem;
-  max-width: 45%;
+  max-width: 100%;
   margin: auto;
 
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr; /* Two columns for weather & map */
     grid-template-rows: auto auto; /* Weather & Map in first row, Graph in second */
     align-items: center;
+    max-width: 50%;
   }
 `;
 

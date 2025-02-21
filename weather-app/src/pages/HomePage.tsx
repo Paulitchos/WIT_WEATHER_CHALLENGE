@@ -8,7 +8,7 @@ import { fetchCoordinates } from "../service/coordsService";
 //COMPONENTS
 import SearchBar from "../components/SearchBar/SearchBar";
 import WeatherDisplay from "../components/WeatherDisplay/WeatherDisplay";
-import ErrorDisplay from "../components/ErrorDisplay";
+import ErrorDisplay from "../components/ErrorDisplay/ErrorDisplay";
 
 const HomePage = () => {
   const [weatherData, setWeatherData] = useState(null);
@@ -17,7 +17,6 @@ const HomePage = () => {
   const [city, setCity] = useState("");
   const [lat, setLat] = useState<number | null>(null);
   const [lon, setLon] = useState<number | null>(null);
-
 
   // Fetch weather data when the city or unit changes
   useEffect(() => {
@@ -57,7 +56,14 @@ const HomePage = () => {
         unit={unit}
       />
       {error && <ErrorDisplay message={error} />}
-      {weatherData && <WeatherDisplay data={weatherData} unit={unit} lat={lat ?? 0} lon={lon ?? 0}/>}
+      {weatherData && (
+        <WeatherDisplay
+          data={weatherData}
+          unit={unit}
+          lat={lat ?? 0}
+          lon={lon ?? 0}
+        />
+      )}
     </div>
   );
 };

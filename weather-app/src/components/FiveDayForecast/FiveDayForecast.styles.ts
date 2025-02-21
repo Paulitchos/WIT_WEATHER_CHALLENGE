@@ -76,7 +76,7 @@ export const Condition = styled.div`
 
 export const WeatherIcon = styled.div`
   margin-right: 0.5rem;
-
+  align-items: center;
   @media (max-width: 768px) {
     margin-right: 0.3rem;
   }
@@ -144,6 +144,7 @@ export const ToggleButton = styled.button`
   justify-content: center;
   width: 40px; /* Fixed width for the button */
   height: 40px; /* Fixed height for the button */
+  margin-left: auto; /* Push the button to the right */
 `;
 
 export const ForecastContent = styled.div`

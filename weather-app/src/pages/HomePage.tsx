@@ -6,9 +6,10 @@ import { fetchWeatherData } from "../service/weatherService";
 import { fetchCoordinates } from "../service/coordsService";
 
 //COMPONENTS
-import SearchBar from "../components/SearchBar/SearchBar";
-import WeatherDisplay from "../components/WeatherDisplay/WeatherDisplay";
-import ErrorDisplay from "../components/ErrorDisplay/ErrorDisplay";
+import SearchBar from "../components/SearchBar";
+import WeatherDisplay from "../components/WeatherDisplay";
+import ErrorDisplay from "../components/ErrorDisplay";
+import WitBanner from "../components/WitBanner";
 
 const HomePage = () => {
   const [weatherData, setWeatherData] = useState(null);
@@ -50,6 +51,7 @@ const HomePage = () => {
 
   return (
     <div>
+      <WitBanner />
       <SearchBar
         onSubmit={handleSearch}
         onUnitChange={handleUnitChange}

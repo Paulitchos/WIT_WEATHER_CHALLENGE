@@ -7,10 +7,7 @@ export const WeatherContainer = styled.div`
   grid-template-rows: auto auto;
   gap: 1.5rem;
   padding: 1.5rem;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 100%;
+  max-width: 45%;
   margin: auto;
 
   @media (min-width: 768px) {
@@ -25,6 +22,12 @@ export const CurrentWeather = styled.div`
   text-align: center;
   max-width: 100%; /* Ensures it doesn't shrink */
   margin: auto;
+
+  @media (max-width: 768px) {
+    grid-column: span 1;
+    width: 100%;
+    min-height: auto;
+  }
 `;
 
 // WEATHER TEMP (Holds Temp & Icon)
@@ -55,12 +58,12 @@ export const WeatherMapContainer = styled.div`
 
 // WEATHER GRAPH CONTAINER (FULL WIDTH ROW)
 export const WeatherGraphContainer = styled.div`
-  grid-column: span 2; /* Makes it take full grid width on larger screens */
+  grid-column: span 1; /* Makes it take full grid width on larger screens */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 1.5rem 0;
-  width: 60%; /* 70% width on larger screens */
+  width: 100%; /* 70% width on larger screens */
   margin: 0 auto;
 
   @media (max-width: 768px) {
@@ -70,7 +73,7 @@ export const WeatherGraphContainer = styled.div`
 `;
 
 export const WeatherForecastContainer = styled.div`
-  grid-column: span 2; /* Makes it take full grid width on larger screens */
+  grid-column: span 1; /* Makes it take full grid width on larger screens */
   display: flex;
   justify-content: center;
   padding: 1.5rem 0;

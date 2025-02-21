@@ -20,8 +20,12 @@ export const Form = styled.form`
   background-color: ${theme.background};
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: auto;
+  max-width: 45%;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
 `;
 
 // INPUT, BUTTON, AND UNIT CONTAINER
@@ -88,7 +92,7 @@ export const StyledSwitch = styled.div`
   position: relative;
   left: -0.5rem; /* Move switch slightly to the left */
 
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     left: 0rem;
   }
 `;

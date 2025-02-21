@@ -10,9 +10,6 @@ import SearchBar from "../components/SearchBar/SearchBar";
 import WeatherDisplay from "../components/WeatherDisplay/WeatherDisplay";
 import ErrorDisplay from "../components/ErrorDisplay";
 
-//STYLE
-import styled from "styled-components";
-
 const HomePage = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState<string | null>(null);

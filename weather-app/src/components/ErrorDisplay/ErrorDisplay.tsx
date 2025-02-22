@@ -1,7 +1,7 @@
 import React from "react";
 
 //STYLES
-import { ErrorContainer } from "./ErrorDisplay.styles";
+import { ErrorContainer, ParentContainer } from "./ErrorDisplay.styles";
 
 //TYPES
 interface ErrorDisplayProps {
@@ -9,7 +9,11 @@ interface ErrorDisplayProps {
 }
 
 const ErrorDisplay: React.FC<ErrorDisplayProps> = ({ message }) => {
-  return <ErrorContainer>{message}</ErrorContainer>;
+  return (
+    <ParentContainer>
+      <ErrorContainer>{message}</ErrorContainer>
+    </ParentContainer>
+  );
 };
 
 export default ErrorDisplay;

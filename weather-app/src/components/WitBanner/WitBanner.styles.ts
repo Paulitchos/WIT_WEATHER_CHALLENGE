@@ -15,23 +15,37 @@ export const BannerContainer = styled.div`
     ${bannerTheme.gradientStart},
     ${bannerTheme.gradientEnd}
   ); // Gradient background
-  color: ${bannerTheme.textColor}; // White text color
+  color: ${bannerTheme.textColor};
   padding: 2rem; // Padding around the content
-  text-align: center; // Center-align text
-  box-shadow: 0 4px 6px ${bannerTheme.shadowColor}; // Subtle shadow for depth
-  margin: auto auto; // Center the banner horizontally
+  text-align: center;
+  box-shadow: 0 4px 6px ${bannerTheme.shadowColor};
+  margin: auto auto;
 `;
 
 //BANNER TITLE
 export const BannerTitle = styled.h1`
-  font-size: 2.5rem; // Large font size for the title
-  margin-bottom: 1rem; // Space below the title
-  font-weight: bold; // Bold font weight for emphasis
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
 `;
 
 //BANNER SUBTITLE
 export const BannerSubtitle = styled.p`
-  font-size: 1.25rem; // Medium font size for the subtitle
-  margin: 0; // Remove default margin
-  line-height: 1.5; // Adjust line height for readability
+  font-size: 1.25rem;
+  margin: 0;
+  line-height: 1.5;
+`;
+
+export const RepoLink = styled.a`
+  color: #fff;
+  text-decoration: none;
+  margin-top: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;

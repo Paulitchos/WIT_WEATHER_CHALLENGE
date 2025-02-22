@@ -1,13 +1,16 @@
-import axios from 'axios';
+import axios from "axios";
 
 const API_KEY = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
-const BASE_URL = 'https://api.openweathermap.org/data/2.5/forecast';
+const BASE_URL = "https://api.openweathermap.org/data/2.5/forecast";
 
-
-
-export const fetchWeatherData = async (city: string, unit: 'metric' | 'imperial' = 'metric') => {
+export const fetchWeatherData = async (
+  city: string,
+  unit: "metric" | "imperial" = "metric"
+) => {
   if (!API_KEY) {
-    console.error("API key is missing. Please check your environment variables.");
+    console.error(
+      "API key is missing. Please check your environment variables."
+    );
   } else {
     console.log("API key:", API_KEY);
   }
@@ -22,7 +25,7 @@ export const fetchWeatherData = async (city: string, unit: 'metric' | 'imperial'
     });
     return response.data;
   } catch (error) {
-    console.error('Error fetching weather data:', error);
+    console.error("Error fetching weather data:", error);
     throw error;
   }
 };

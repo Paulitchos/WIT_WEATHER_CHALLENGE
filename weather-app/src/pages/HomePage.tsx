@@ -1,5 +1,4 @@
-//REACT
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 //SERVICE
 import { fetchWeatherData } from "../service/weatherService";
@@ -19,14 +18,7 @@ const HomePage = () => {
   const [lat, setLat] = useState<number | null>(null);
   const [lon, setLon] = useState<number | null>(null);
 
-  // Fetch weather data when the city or unit changes
-  useEffect(() => {
-    if (city) {
-      handleSearch(city);
-    }
-  }, [unit]); // Re-fetch when `unit` changes
-
-  const handleSearch = async (city: string) => {
+  const handleSearch = useCallback(async (city: string) => {
     setCity(city); // Save the city name
     try {
       const data = await fetchWeatherData(city, unit);
@@ -43,7 +35,13 @@ const HomePage = () => {
       setLat(null);
       setLon(null);
     }
-  };
+  }, [unit]); // Add `unit` as a dependency
+
+  useEffect(() => {
+    if (city) {
+      handleSearch(city);
+    }
+  }, [city, handleSearch]); // Add `city` and `handleSearch` as dependencies
 
   const handleUnitChange = (newUnit: "metric" | "imperial") => {
     setUnit(newUnit);

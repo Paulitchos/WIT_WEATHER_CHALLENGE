@@ -1,5 +1,11 @@
 import React from "react";
+
+//COMPONENTS
 import TemperatureMap from "../TemperatureMap";
+import TemperatureGraph from "../TemperatureGraph";
+import Forecast from "../FiveDayForecast/FiveDayForecast";
+
+//STYLES
 import {
   WeatherContainer,
   CurrentWeather,
@@ -7,11 +13,10 @@ import {
   WeatherIcon,
   WeatherMapContainer,
   WeatherGraphContainer,
-  WeatherForecastContainer
+  WeatherForecastContainer,
 } from "./WeatherDisplay.styles";
-import TemperatureGraph from "../TemperatureGraph";
-import Forecast from "../FiveDayForecast/FiveDayForecast";
 
+//TYPES
 interface WeatherDisplayProps {
   data: any;
   unit: "metric" | "imperial";
@@ -38,13 +43,17 @@ const WeatherDisplay = ({ data, unit, lat, lon }: WeatherDisplayProps) => {
       <CurrentWeather>
         <h1>{data.city.name}</h1>
         <CurrentWeatherTemp>
-          <WeatherIcon>{getWeatherIcon(currentWeather.weather[0].icon)}</WeatherIcon>
+          <WeatherIcon>
+            {getWeatherIcon(currentWeather.weather[0].icon)}
+          </WeatherIcon>
           <h2>
-            {Math.round(currentWeather.main.temp)}°{unit === "metric" ? "C" : "F"}
+            {Math.round(currentWeather.main.temp)}°
+            {unit === "metric" ? "C" : "F"}
           </h2>
         </CurrentWeatherTemp>
         <p>
-          Feels like {Math.round(currentWeather.main.feels_like)}°{unit === "metric" ? "C" : "F"}.{" "}
+          Feels like {Math.round(currentWeather.main.feels_like)}°
+          {unit === "metric" ? "C" : "F"}.{" "}
           {currentWeather.weather[0].description
             .split(" ")
             .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -56,12 +65,12 @@ const WeatherDisplay = ({ data, unit, lat, lon }: WeatherDisplayProps) => {
       <WeatherMapContainer>
         <TemperatureMap latitude={lat} longitude={lon} />
       </WeatherMapContainer>
-      
+
       {/* Weather Graph Container - Positioned below current weather */}
       <WeatherGraphContainer>
         <TemperatureGraph forecast={data.list} unit={unit} />
       </WeatherGraphContainer>
-      
+
       <WeatherForecastContainer>
         <Forecast forecast={data.list} unit={unit} />
       </WeatherForecastContainer>

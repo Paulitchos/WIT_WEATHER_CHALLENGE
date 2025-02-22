@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-//SERVICE
+//SERVICES
 import { fetchWeatherData } from "../service/weatherService";
 import { fetchCoordinates } from "../service/coordsService";
 
@@ -18,30 +18,33 @@ const HomePage = () => {
   const [lat, setLat] = useState<number | null>(null);
   const [lon, setLon] = useState<number | null>(null);
 
-  const handleSearch = useCallback(async (city: string) => {
-    setCity(city); // Save the city name
-    try {
-      const data = await fetchWeatherData(city, unit);
-      const { lat, lon } = await fetchCoordinates(city);
-      setLat(lat);
-      setLon(lon);
-      setWeatherData(data);
-      setError(null);
-    } catch (err) {
-      setError(
-        "Failed to fetch weather data. Please check the city name and try again."
-      );
-      setWeatherData(null);
-      setLat(null);
-      setLon(null);
-    }
-  }, [unit]); // Add `unit` as a dependency
+  const handleSearch = useCallback(
+    async (city: string) => {
+      setCity(city); // Save the city name
+      try {
+        const data = await fetchWeatherData(city, unit);
+        const { lat, lon } = await fetchCoordinates(city);
+        setLat(lat);
+        setLon(lon);
+        setWeatherData(data);
+        setError(null);
+      } catch (err) {
+        setError(
+          "Failed to fetch weather data. Please check the city name and try again."
+        );
+        setWeatherData(null);
+        setLat(null);
+        setLon(null);
+      }
+    },
+    [unit]
+  );
 
   useEffect(() => {
     if (city) {
       handleSearch(city);
     }
-  }, [city, handleSearch]); // Add `city` and `handleSearch` as dependencies
+  }, [city, handleSearch]);
 
   const handleUnitChange = (newUnit: "metric" | "imperial") => {
     setUnit(newUnit);

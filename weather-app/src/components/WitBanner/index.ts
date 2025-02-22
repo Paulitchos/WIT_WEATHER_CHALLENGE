@@ -1,3 +1,3 @@
-import WitBanner from './WitBanner';
+import WitBanner from "./WitBanner";
 
 export default WitBanner;

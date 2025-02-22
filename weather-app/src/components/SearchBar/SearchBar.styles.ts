@@ -1,7 +1,6 @@
-// src/components/SearchBar/SearchBar.styles.ts
 import styled from "styled-components";
 
-// WIT THEME COLORS
+//WIT THEME COLORS
 const theme = {
   primary: "#004080",
   secondary: "#007BFF",
@@ -10,10 +9,10 @@ const theme = {
   error: "#FF0000",
 };
 
-// FORM CONTAINER
+//FORM CONTAINER
 export const Form = styled.form`
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
+  flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
   padding: 1.5rem;
@@ -22,13 +21,9 @@ export const Form = styled.form`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   max-width: 45%;
   margin: 0 auto;
-
-  @media (max-width: 768px) {
-    max-width: 100%;
-  }
 `;
 
-// INPUT, BUTTON, AND UNIT CONTAINER
+//INPUT, BUTTON, AND UNIT CONTAINER
 export const InlineContainer = styled.div`
   display: flex;
   align-items: center;
@@ -36,14 +31,14 @@ export const InlineContainer = styled.div`
   width: 100%;
 `;
 
-// INPUT AND BUTTON CONTAINER
+//INPUT AND BUTTON CONTAINER
 export const InputContainer = styled.div`
   display: flex;
-  width: 100%; /* Adjust width as needed */
+  width: 100%;
   gap: 0.5rem;
 `;
 
-// INPUT FIELD
+//INPUT FIELD
 export const Input = styled.input`
   width: 100%;
   padding: 0.75rem;
@@ -59,28 +54,28 @@ export const Input = styled.input`
   }
 `;
 
-// ERROR MESSAGE
+//ERROR MESSAGE
 export const ErrorMessage = styled.div`
   color: ${theme.error};
-  background-color: rgba(255, 0, 0, 0.1); /* Light red background */
+  background-color: rgba(255, 0, 0, 0.1);
   padding: 0.5rem;
   font-size: 0.875rem;
   margin-top: 0.25rem;
-  border-left: 4px solid ${theme.error}; /* Adds a left border for emphasis */
+  border-left: 4px solid ${theme.error};
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(255, 0, 0, 0.1);
   width: 88%; /* Span full width */
   text-align: left;
 `;
 
-// UNIT SELECTION CONTAINER
+//UNIT SELECTION CONTAINER
 export const UnitContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
 `;
 
-// UNIT LABEL
+//UNIT LABEL
 export const UnitLabel = styled.span`
   font-size: 1rem;
   color: ${theme.text};
@@ -90,14 +85,18 @@ export const StyledSwitch = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  left: -0.5rem; /* Move switch slightly to the left */
+  left: -0.5rem;
 
   @media (max-width: 768px) {
     left: 0rem;
   }
+
+  @media (max-width: 1920px) and (orientation: landscape) {
+    left: 0rem;
+  }
 `;
 
-// SUBMIT BUTTON
+//SUBMIT BUTTON
 export const Button = styled.button`
   padding: 0.75rem 1rem;
   background-color: ${theme.primary};
@@ -120,24 +119,11 @@ export const Button = styled.button`
   }
 `;
 
-// RESPONSIVE CONTAINER
+//RESPONSIVE CONTAINER
 export const ResponsiveContainer = styled.div`
   padding: 0.5rem 0.75rem;
+
   @media (max-width: 768px) {
-    ${Form} {
-      padding: 1rem;
-    }
-
-    ${Input} {
-      font-size: 0.875rem;
-    }
-
-    ${Button} {
-      font-size: 0.875rem;
-    }
-  }
-
-  @media (max-width: 480px) {
     ${Form} {
       display: flex;
       flex-direction: column;
@@ -146,18 +132,46 @@ export const ResponsiveContainer = styled.div`
       background-color: ${theme.background};
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      max-width: 500px;
+      max-width:100%;
       gap: 0.75rem;
       margin: 0.5rem 0.5rem;
     }
 
     ${InlineContainer} {
-      flex-direction: column; /* Stack input + button and unit controller vertically on mobile */
+      flex-direction: column;
       gap: 0.5rem;
     }
 
     ${InputContainer} {
-      width: 100%; /* Full width on mobile */
+      width: 100%;
+    }
+
+    ${Button} {
+      padding: 0.5rem;
+    }
+  }
+
+  @media (max-width: 1920px) and (orientation: landscape) {
+    ${Form} {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem;
+      background-color: ${theme.background};
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width:100%;
+      gap: 0.75rem;
+      margin: 0.5rem 0.5rem;
+    }
+
+    ${InlineContainer} {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    ${InputContainer} {
+      width: 100%;
     }
 
     ${Button} {

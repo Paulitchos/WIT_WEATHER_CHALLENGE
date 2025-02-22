@@ -1,9 +1,14 @@
-// src/components/SearchBar/SearchBar.tsx
 import React from "react";
+
+//FORMIK + YUP
 import { useFormik } from "formik";
 import * as Yup from "yup";
+
+//ICONS
 import { FaSearch } from "react-icons/fa"; // Import search icon
 import Switch from "react-switch"; // Import toggle switch
+
+//STYLES
 import {
   Form,
   InputContainer,
@@ -15,8 +20,9 @@ import {
   ResponsiveContainer,
   InlineContainer,
   StyledSwitch,
-} from "./SearchBar.styles"; // Import styles
+} from "./SearchBar.styles";
 
+//TYPES
 interface SearchBarProps {
   onSubmit: (city: string) => void;
   onUnitChange: (unit: "metric" | "imperial") => void;
@@ -27,17 +33,17 @@ const SearchBar = ({ onSubmit, onUnitChange, unit }: SearchBarProps) => {
   // FORMIK FORM HANDLING
   const formik = useFormik({
     initialValues: {
-      city: "", // Initial value for the city input
+      city: "",
     },
     validationSchema: Yup.object({
       city: Yup.string()
         .required("City is required")
-        .trim() // Trim the input value before validation
-        .min(1, "City cannot be empty"), // Ensure the trimmed value is not empty
+        .trim()
+        .min(1, "City cannot be empty"),
     }),
     onSubmit: (values) => {
-      const trimmedCity = values.city.trim(); // Trim the city input before submitting
-      onSubmit(trimmedCity); // Call the parent onSubmit with the trimmed city value
+      const trimmedCity = values.city.trim();
+      onSubmit(trimmedCity);
     },
   });
 
@@ -62,7 +68,7 @@ const SearchBar = ({ onSubmit, onUnitChange, unit }: SearchBarProps) => {
               value={formik.values.city}
             />
             <Button type="submit" aria-label="Search">
-              <FaSearch /> {/* Search icon */}
+              <FaSearch />
             </Button>
           </InputContainer>
 
@@ -70,18 +76,18 @@ const SearchBar = ({ onSubmit, onUnitChange, unit }: SearchBarProps) => {
           <UnitContainer>
             <UnitLabel>Metric: °C</UnitLabel>
             <StyledSwitch>
-            <Switch
-              onChange={handleUnitToggle}
-              checked={unit === "imperial"}
-              checkedIcon={false}
-              uncheckedIcon={false}
-              height={20}
-              width={48}
-              handleDiameter={18}
-              offColor="#ccc"
-              onColor="#007BFF"
-              className="Switch"
-            />
+              <Switch
+                onChange={handleUnitToggle}
+                checked={unit === "imperial"}
+                checkedIcon={false}
+                uncheckedIcon={false}
+                height={20}
+                width={48}
+                handleDiameter={18}
+                offColor="#ccc"
+                onColor="#007BFF"
+                className="Switch"
+              />
             </StyledSwitch>
             <UnitLabel>Imperial: °F</UnitLabel>
           </UnitContainer>

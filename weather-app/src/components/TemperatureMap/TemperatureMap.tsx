@@ -1,17 +1,21 @@
 import React, { useEffect, useRef } from "react";
+
+//LEAFLET
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+
+//STYLES
 import { MapContainer } from "./TemperatureMap.styles";
-import "./index.css"
+import "./index.css";
 
-
-const API_KEY = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
-
+//TYPES
 interface TemperatureMapProps {
   latitude: number;
   longitude: number;
   zoom?: number;
 }
+
+const API_KEY = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
 
 const TemperatureMap: React.FC<TemperatureMapProps> = ({
   latitude,
@@ -23,15 +27,15 @@ const TemperatureMap: React.FC<TemperatureMapProps> = ({
   useEffect(() => {
     if (!mapRef.current || !API_KEY) return;
 
-    // Initialize the map
+    //Initialize the map
     const map = L.map(mapRef.current).setView([latitude, longitude], zoom);
 
-    // Add OpenStreetMap as base layer
+    //Add OpenStreetMap as base layer
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '© OpenStreetMap contributors',
+      attribution: "© OpenStreetMap contributors",
     }).addTo(map);
 
-    // Add OpenWeatherMap temperature tile layer
+    //Add OpenWeatherMap temperature tile layer
     L.tileLayer(
       `https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=${API_KEY}`,
       {
@@ -41,7 +45,7 @@ const TemperatureMap: React.FC<TemperatureMapProps> = ({
       }
     ).addTo(map);
 
-    // Define a custom legend control
+    //Define a custom legend control
     const LegendControl = L.Control.extend({
       options: { position: "bottomright" },
 
@@ -60,12 +64,12 @@ const TemperatureMap: React.FC<TemperatureMapProps> = ({
       },
     });
 
-    // Add legend to the map
+    //Add legend to the map
     const legend = new LegendControl();
     legend.addTo(map);
 
     return () => {
-      map.remove(); // Cleanup map instance on unmount
+      map.remove(); //Cleanup map instance on unmount
     };
   }, [latitude, longitude, zoom]);
 

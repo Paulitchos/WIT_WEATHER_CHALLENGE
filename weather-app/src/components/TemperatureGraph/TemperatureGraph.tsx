@@ -1,4 +1,6 @@
 import React from "react";
+
+//RECHARTS
 import {
   LineChart,
   Line,
@@ -8,42 +10,48 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
+
+//STYLES
 import { GraphContainer, Title, ChartWrapper } from "./TemperatureGraph.styles";
 
+//TYPES
 interface TemperatureGraphProps {
   forecast: any;
   unit: "metric" | "imperial";
 }
 
-// Custom XAxis tick: smaller font on mobile, larger on desktop
+//Custom XAxis tick: smaller font on mobile, larger on desktop
 const CustomXAxisTick = (props: any) => {
   const { x, y, payload } = props;
-  // Use 10px for mobile (<768px), else 12px
+  //Use 10px for mobile (<768px), else 12px
   const fontSize = window.innerWidth < 768 ? 10 : 12;
   return (
-    <text
-      x={x}
-      y={y + 15} // Adjust vertical position as needed
-      textAnchor="middle"
-      fill="#666"
-      fontSize={fontSize}
-    >
+    <text x={x} y={y + 15} textAnchor="middle" fill="#666" fontSize={fontSize}>
       {payload.value}
     </text>
   );
 };
 
-const TemperatureGraph: React.FC<TemperatureGraphProps> = ({ forecast, unit }) => {
+const TemperatureGraph: React.FC<TemperatureGraphProps> = ({
+  forecast,
+  unit,
+}) => {
   const graphData = Array.isArray(forecast)
     ? forecast.slice(0, 12).map((entry: any) => {
         const date = new Date(entry.dt * 1000);
         const hours = date.getHours();
         return {
-          // If it's midnight (12 AM), show the date; otherwise, show the time.
+          //If it's midnight (12 AM), show the date; otherwise, show the time.
           time:
             hours === 0
-              ? date.toLocaleDateString("en-US", { month: "short", day: "numeric" })
-              : date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+              ? date.toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                })
+              : date.toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                }),
           temp: entry.main.temp,
         };
       })

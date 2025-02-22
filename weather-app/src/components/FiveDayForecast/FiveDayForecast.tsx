@@ -1,5 +1,9 @@
 import React, { useState } from "react";
+
+//ICONS
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+
+//STYLES
 import {
   ForecastContainer,
   ForecastDay,
@@ -14,16 +18,22 @@ import {
   DetailItem,
   ToggleButton,
   ForecastContent,
-  TemperatureDetailsContainer, // New container
+  TemperatureDetailsContainer,
 } from "./FiveDayForecast.styles";
 
+//TYPES
 interface ForecastProps {
   forecast: Array<{
     dt_txt: string;
-    main: { temp_min: number; temp_max: number; humidity: number; pressure: number };
+    main: {
+      temp_min: number;
+      temp_max: number;
+      humidity: number;
+      pressure: number;
+    };
     weather: Array<{ icon: string; description: string }>;
     wind: { speed: number };
-    pop: number; // Probability of precipitation
+    pop: number;
   }>;
   unit: "metric" | "imperial";
 }
@@ -31,7 +41,7 @@ interface ForecastProps {
 const Forecast: React.FC<ForecastProps> = ({ forecast, unit }) => {
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
 
-  // Helper function to group forecast data by day
+  //Helper function to group forecast data by day
   const groupForecastByDay = (forecast: any[]) => {
     const groupedData: { [key: string]: any } = {};
 
@@ -51,11 +61,11 @@ const Forecast: React.FC<ForecastProps> = ({ forecast, unit }) => {
           humidity: item.main.humidity,
           windSpeed: item.wind.speed,
           pressure: item.main.pressure,
-          precipitation: item.pop * 100, // Convert to percentage
-          hourly: [], // Initialize hourly data
+          precipitation: item.pop * 100,
+          hourly: [],
         };
       } else {
-        // Update min and max temperatures for the day
+        //Update min and max temperatures for the day
         groupedData[date].minTemp = Math.min(
           groupedData[date].minTemp,
           item.main.temp_min
@@ -66,7 +76,7 @@ const Forecast: React.FC<ForecastProps> = ({ forecast, unit }) => {
         );
       }
 
-      // Add hourly data for the selected day
+      //Add hourly data for the selected day
       groupedData[date].hourly.push({
         time: new Date(item.dt_txt).toLocaleTimeString("en-US", {
           hour: "numeric",
@@ -80,10 +90,10 @@ const Forecast: React.FC<ForecastProps> = ({ forecast, unit }) => {
     return Object.values(groupedData);
   };
 
-  // Group forecast data by day
+  //Group forecast data by day
   const dailyForecast = groupForecastByDay(forecast);
 
-  // Helper function to get weather icon
+  //Helper function to get weather icon
   const getWeatherIcon = (iconCode: string) => (
     <img
       src={`https://openweathermap.org/img/wn/${iconCode}@2x.png`}
@@ -93,7 +103,7 @@ const Forecast: React.FC<ForecastProps> = ({ forecast, unit }) => {
     />
   );
 
-  // Find the selected day's data
+  //Find the selected day's data
   const selectedDayData = dailyForecast.find((day) => day.date === selectedDay);
 
   return (
@@ -103,10 +113,7 @@ const Forecast: React.FC<ForecastProps> = ({ forecast, unit }) => {
         {/* 5-Day Forecast (Hidden when details are shown) */}
         <div style={{ visibility: selectedDay ? "hidden" : "visible" }}>
           {dailyForecast.map((day, index) => (
-            <ForecastDay
-              key={index}
-              onClick={() => setSelectedDay(day.date)}
-            >
+            <ForecastDay key={index} onClick={() => setSelectedDay(day.date)}>
               <DateLabel>
                 {new Date(day.date).toLocaleDateString("en-US", {
                   weekday: "short",
@@ -130,16 +137,18 @@ const Forecast: React.FC<ForecastProps> = ({ forecast, unit }) => {
                     .join(" ")}
                 </Condition>
               </TemperatureRange>
-              <FaChevronDown style={{ marginLeft: "auto" }} /> {/* Chevron icon */}
+              <FaChevronDown style={{ marginLeft: "auto" }} />{" "}
             </ForecastDay>
           ))}
         </div>
 
         {/* Detailed Forecast (Shown when a day is clicked) */}
         {selectedDay && (
-          <ForecastDetails style={{ visibility: selectedDay ? "visible" : "hidden" }}>
+          <ForecastDetails
+            style={{ visibility: selectedDay ? "visible" : "hidden" }}
+          >
             <ToggleButton onClick={() => setSelectedDay(null)}>
-              <FaChevronUp style={{ marginLeft: "auto" }} /> {/* Chevron icon */}
+              <FaChevronUp style={{ marginLeft: "auto" }} />{" "}
             </ToggleButton>
             <WeatherInfo>
               <h2>
@@ -152,10 +161,14 @@ const Forecast: React.FC<ForecastProps> = ({ forecast, unit }) => {
                   .join(" ")}
               </h2>
               <TemperatureDetailsContainer>
-                <WeatherIcon>{getWeatherIcon(selectedDayData?.weather.icon)}</WeatherIcon>
+                <WeatherIcon>
+                  {getWeatherIcon(selectedDayData?.weather.icon)}
+                </WeatherIcon>
                 <TemperatureValue>
-                  {Math.round(selectedDayData?.maxTemp)}°{unit === "metric" ? "C" : "F"} /{" "}
-                  {Math.round(selectedDayData?.minTemp)}°{unit === "metric" ? "C" : "F"}
+                  {Math.round(selectedDayData?.maxTemp)}°
+                  {unit === "metric" ? "C" : "F"} /{" "}
+                  {Math.round(selectedDayData?.minTemp)}°
+                  {unit === "metric" ? "C" : "F"}
                 </TemperatureValue>
               </TemperatureDetailsContainer>
             </WeatherInfo>

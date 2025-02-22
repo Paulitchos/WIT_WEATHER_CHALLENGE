@@ -1,6 +1,6 @@
-// src/components/TemperatureMap/TemperatureMap.styles.ts
 import styled from "styled-components";
 
+//MAP CONTAINER
 export const MapContainer = styled.div`
   height: 500px;
   width: 100%;
@@ -9,6 +9,7 @@ export const MapContainer = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 `;
 
+//LEGEND CONTAINER
 export const LegendContainer = styled.div`
   background: rgba(255, 255, 255, 0.8);
   padding: 10px;
@@ -19,6 +20,7 @@ export const LegendContainer = styled.div`
   text-align: center;
 `;
 
+//GRADIENT BAR
 export const GradientBar = styled.div`
   width: 150px;
   height: 12px;
@@ -26,6 +28,7 @@ export const GradientBar = styled.div`
   margin-top: 5px;
 `;
 
+//SCALE LABELS
 export const ScaleLabels = styled.div`
   display: flex;
   justify-content: space-between;

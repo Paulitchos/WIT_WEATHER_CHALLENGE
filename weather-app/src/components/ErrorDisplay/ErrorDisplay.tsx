@@ -1,6 +1,9 @@
-import React from 'react';
-import { ErrorContainer } from './ErrorDisplay.styles';
+import React from "react";
 
+//STYLES
+import { ErrorContainer } from "./ErrorDisplay.styles";
+
+//TYPES
 interface ErrorDisplayProps {
   message: string;
 }

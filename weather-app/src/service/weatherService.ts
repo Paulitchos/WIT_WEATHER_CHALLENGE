@@ -7,14 +7,6 @@ export const fetchWeatherData = async (
   city: string,
   unit: "metric" | "imperial" = "metric"
 ) => {
-  if (!API_KEY) {
-    console.error(
-      "API key is missing. Please check your environment variables."
-    );
-  } else {
-    console.log("API key:", API_KEY);
-  }
-
   try {
     const response = await axios.get(BASE_URL, {
       params: {
